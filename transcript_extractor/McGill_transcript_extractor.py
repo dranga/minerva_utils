@@ -21,7 +21,7 @@ import argparse
 
 #argument parsing
 parser = argparse.ArgumentParser()
-parser.add_argument("johndoe0@mail.mcgill.ca", help = "McGill email")
+parser.add_argument("email", help = "McGill email (e.g. john.doe0@mail.mcgill.ca")
 parser.add_argument("output_file", help = "File to write to (e.g. output.html)")
 args = parser.parse_args()
 

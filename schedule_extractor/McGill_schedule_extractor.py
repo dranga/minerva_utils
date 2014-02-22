@@ -24,7 +24,7 @@ color = "lightgray"
 
 #argument parsing
 parser = argparse.ArgumentParser()
-parser.add_argument("john.doe0@mail.mcgill.ca", help = "McGill email")
+parser.add_argument("email", help = "McGill email (e.g. john.doe0@mail.mcgill.ca")
 parser.add_argument("output_file", help = "File to write to (e.g. output.html)")
 parser.add_argument("weekof", help = "Schedule for specific week mm/dd/yyyy")
 parser.add_argument("-c","--color", help = "Highlight color (any css valid color, e.g. '-c red' or '-c #f00'). default: lightgray") 
@@ -34,6 +34,7 @@ username = args.email
 output_file = args.output_file
 date = args.weekof
 color = args.color or color #overwrite default if available
+
 
 #prompt for password
 password = getpass.getpass("McGill Password: ")
