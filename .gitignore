@@ -1,4 +1,6 @@
 #auxiliary test files ignore
 *.html
 *.txt
+*.pdf
 *~
+.*
