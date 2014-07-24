@@ -76,8 +76,6 @@ resp = transc_opener.open(transc_url)
 #transcript HTML retreived
 transc_html = StringIO.StringIO(resp.read())
 
-#fo.write(html_start)
-
 transc_fixed = list()
 transc_fixed.append(html_start)
 match_found = 0
@@ -136,37 +134,21 @@ for line in transc_html :
 
 transc_fixed.append("</html>")
 
+#generate html
 if(nopdf or not (html_file is None)):
 	fo = open(html_file, 'w')
 	fo.write("".join(transc_fixed)) #write the modified transcript to the output file
 	fo.close()
 
+#generate pdf
 if(not nopdf):
 
-	toPDF(fo_pdf, linelist)
-	#ok but ends up scrunched up 
-	#fix w/ reduce colspan = "11" to colspan = "8"
-	#transc_fixed = re.sub('COLSPAN="11"','COLSPAN="8"',"".join(transc_fixed))
-	#didn't help :(
-
-	#it was pointed out that Points doesn't have WIDTH attribute, that might cause it to be tiny
-	#also Title column doesn't have a set width 
-
-	#Soln : fix the width
-	transc_fixed = "".join(transc_fixed)
-	
-	transc_fixed = re.sub('<TD NOWRAP', '<TD COLSPAN="1"', transc_fixed)
-	#transc_fixed = re.sub('<TD CLASS="delabel" scope="row" ><p class="centeraligntext"><SPAN class=fieldmediumtextbold>Title</SPAN></TD>',
-	#						'<TD COLSPAN="3" CLASS="delabel" scope="row" ><p class="centeraligntext"><SPAN class=fieldmediumtextbold>Title</SPAN></TD>',
-	#						transc_fixed)
-
-	fo = open(html_file, 'w')
-	fo.write(transc_fixed) #write the modified transcript to the output file
-	fo.close()
-
 	fo = open(output_file, 'w')
-	pisa.pisaDocument(transc_fixed,fo)
+	toPDF(fo, transc_fixed)
 	fo.close()
+
+
+
 
 def toPDF(fo, linelist):
 	TD = 0
@@ -240,4 +222,9 @@ def toPDF(fo, linelist):
 
 	transc_fixed = "".join(transc_fixed)
 
-	return transc_fixed
+	#for debugging
+	#fo_html_new = open("output_to_pdf.html", 'w')
+	#fo_html_new.write(transc_fixed)
+	#fo_html_new.close()
+
+	pisa.pisaDocument(transc_fixed,fo_pdf) #write the modified transcript to the output file
