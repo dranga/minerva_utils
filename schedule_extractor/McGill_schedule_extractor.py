@@ -28,12 +28,14 @@ parser.add_argument("email", help = "McGill email (e.g. john.doe0@mail.mcgill.ca
 parser.add_argument("output_file", help = "File to write to (e.g. output.html)")
 parser.add_argument("weekof", help = "Schedule for specific week mm/dd/yyyy")
 parser.add_argument("-c","--color", help = "Highlight color (any css valid color, e.g. '-c red' or '-c #f00'). default: lightgray") 
+parser.add_argument("-w","--weekend", help = "display weekends (default : off)", action="store_true")
 args = parser.parse_args()
 
 username = args.email
 output_file = args.output_file
 date = args.weekof
 color = args.color or color #overwrite default if available
+weekends = True if args.weekend else False
 
 
 #prompt for password
@@ -91,7 +93,7 @@ for line in shed_html :
 	match_found = True
 	
 	#if line is end of row, remove previous 2 elements (removing saturday and sunday)
-	if(re.search('<\/TR>',line)):
+	if(re.search('<\/TR>',line) and  not weekends):
 		shed_fixed.pop()
 		shed_fixed.pop()
 	
