@@ -37,10 +37,13 @@ except ImportError:
 #password = sys.argv[2]
 #output_file = sys.argv[3]
 
+defaultName_html = "output.html"
+defaultName_pdf = "output.pdf"
+
 #argument parsing
 parser = argparse.ArgumentParser()
 parser.add_argument("email", help = "McGill email (e.g. john.doe0@mail.mcgill.ca")
-parser.add_argument("output_file", help = "File to write to (e.g. output.html)")
+parser.add_argument("output_file", help = "File to write to (e.g. output.pdf)")
 parser.add_argument("--html", help = "Keep generated html (default: False, unless PDF generation module is unavailable)")
 parser.add_argument("--nopdf", help = "Do not generate a final PDF, keep html only(default: False, unless PDF module is unavailable)",  action="store_true")
 args = parser.parse_args()
@@ -61,6 +64,8 @@ transc_fixed = TranscriptMods.parseHtml(minervaInst.GetTranscript())
 
 #generate html
 if(nopdf or not (html_file is None)):
+	if (html_file is None):
+		html_file = defaultName_html
 	fo = open(html_file, 'w')
 	fo.write("".join(transc_fixed)) #write the modified transcript to the output file
 	fo.close()
