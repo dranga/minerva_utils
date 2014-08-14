@@ -20,13 +20,17 @@ class MinervaConnect(object):
 		self.val_opener.addheaders.append(('Cookie', 'TESTID=set'))
 		self.val_opener.open(self.val_url, login_data)
 
-	def GetTranscript(self):
+	def OpenValidatedURL(self,url):
 		transc_opener = urllib2.build_opener()
 		for cookie in self.cj:
 			if(cookie.name == 'SESSID'):
 				transc_opener.addheaders.append(('Cookie', 'SESSID=' + cookie.value))
 
-		resp = transc_opener.open(self.transc_url)
+		return transc_opener.open(url)
+
+	def GetTranscript(self):
+		
+		resp = self.OpenValidatedURL(self.transc_url)
 
 		#transcript HTML retreived
 		transc_html = StringIO.StringIO(resp.read())
