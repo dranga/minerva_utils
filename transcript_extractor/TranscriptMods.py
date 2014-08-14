@@ -102,7 +102,7 @@ def toPDF(fo, linelist):
 			#to
 			#<TD WIDTH="$width"CLASS="dedefault"><SPAN class=fieldmediumtext>.*</SPAN></TD>
 
-			print "CHANGING WIDTH"
+			#print "CHANGING WIDTH"
 			#$width, 11 width values in array
 			for i in range(len(temp)):
 				templine = temp[i]
