@@ -1,9 +1,5 @@
 #! /usr/bin/python
 
-
-# need main with on start function load
-# class with static functions : parse html, toPDF
-
 import sys
 
 from MinervaConnect import MinervaConnect
@@ -74,5 +70,5 @@ if(nopdf or not (html_file is None)):
 if(not nopdf):
 
 	fo = open(output_file, 'w')
-	TranscriptMods.toPDF(fo, transc_fixed)
+	TranscriptMods.TranscriptToPDF(fo, transc_fixed)
 	fo.close()

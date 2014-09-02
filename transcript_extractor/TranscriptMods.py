@@ -67,7 +67,7 @@ def parseHtml(lineList):
 
 	return transc_fixed
 
-def toPDF(fo, linelist):
+def TransciptToPDF(fo, linelist):
 
 	import ho.pisa as pisa 
 	TD = 0
