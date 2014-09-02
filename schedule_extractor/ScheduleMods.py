@@ -69,12 +69,12 @@ text-align: left;
 vertical-align: top;
 padding-top: 1px;
 padding-left: 1px;
-border: 1px solid #000;
-/*border: 0px solid #000;
-border-right: 1px solid #000;*/
+/*border: 1px solid #000;*/
+border: 0px solid #000;
+border-right: 1px solid #000;
 border-collapse:collapse;
 }
-/*
+
 tr {
 	border: 0px solid #000;
 	border-top: 1px dashed #000;
@@ -83,7 +83,7 @@ tr {
 tr.ddlabel {
 	border-top: 1px solid #000;
 }
-*/
+
 table.datadisplaytable {
 	border: 1px solid #000;
 border-collapse:collapse;
@@ -111,6 +111,11 @@ border-collapse:collapse;
 			line = re.sub('<A HREF=".*">','',line) #remove link
 			line = re.sub('([A-Z]{4} \d{3}-\d{3}<BR>).*<BR>(.*<BR>)',r'\1\2',line) #remove some less useful information (keep course code, times, location)
 		
+		if(re.search('<TH ROWSPAN="4" CLASS="ddlabel"'), line):
+			prevLine = sched_fixed.pop()
+			prevLine = '<tr class="ddlabel">'
+			sched_fixed.append(prevLine)
+
 		#line is to be written to the output file (valid line)
 		sched_fixed.append(line)
 		
@@ -126,7 +131,7 @@ def ScheduleToPDF(fo, linelist):
 	import ho.pisa as pisa 
 
 	sched_pdf = list()
-	
+
 	for line in lineList :
 		if(re.search('<TH ROWSPAN="4" CLASS="ddlabel"', line)):
 			line = line + ' width="42px"'
