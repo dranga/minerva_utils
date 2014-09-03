@@ -111,9 +111,9 @@ border-collapse:collapse;
 			line = re.sub('<A HREF=".*">','',line) #remove link
 			line = re.sub('([A-Z]{4} \d{3}-\d{3}<BR>).*<BR>(.*<BR>)',r'\1\2',line) #remove some less useful information (keep course code, times, location)
 		
-		if(re.search('<TH ROWSPAN="4" CLASS="ddlabel"'), line):
+		if(re.search('<TH ROWSPAN="4" CLASS="ddlabel"', line)):
 			prevLine = sched_fixed.pop()
-			prevLine = '<tr class="ddlabel">'
+			prevLine = '<tr class="ddlabel">' + "\n"
 			sched_fixed.append(prevLine)
 
 		#line is to be written to the output file (valid line)
@@ -126,7 +126,7 @@ border-collapse:collapse;
 
 	return sched_fixed
 
-def ScheduleToPDF(fo, linelist):
+def ScheduleToPDF(fo, lineList):
 
 	import ho.pisa as pisa 
 
@@ -134,10 +134,15 @@ def ScheduleToPDF(fo, linelist):
 
 	for line in lineList :
 		if(re.search('<TH ROWSPAN="4" CLASS="ddlabel"', line)):
-			line = line + ' width="42px"'
-
+			line = re.sub('(<TH ROWSPAN="4" CLASS="ddlabel")(.*)', r'\1 width="42px" \2', line)
+			line = line + "\n"
 		sched_pdf.append(line)
 
 	linelist_fixed = "".join(sched_pdf)
+
+	#for debugging
+	fo_html_new = open("output_to_pdf.html", 'w')
+	fo_html_new.write(linelist_fixed)
+	fo_html_new.close()
 
 	pisa.pisaDocument(linelist_fixed,fo) #write the modified transcript to the output file

@@ -32,7 +32,7 @@ class MinervaConnect(object):
 		
 		resp = self.OpenValidatedURL(self.shed_url + date)
 
-		#transcript HTML retreived
-		transc_html = StringIO.StringIO(resp.read())
+		#schedule HTML retreived
+		sched_html = StringIO.StringIO(resp.read())
 
 		return sched_html

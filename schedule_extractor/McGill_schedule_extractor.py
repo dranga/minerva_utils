@@ -66,7 +66,7 @@ minervaInst = MinervaConnect(username, password)
 
 minervaInst.Login()
 
-sched_fixed = ScehduleMods.parseHtml(MinervaInst.getSchedule(date), weekends, color)
+sched_fixed = ScheduleMods.parseHtml(minervaInst.GetSchedule(date), weekends, color)
 
 #generate html
 if(nopdf or not (output_file is None)):
@@ -81,5 +81,5 @@ if(nopdf or not (output_file is None)):
 if(not nopdf):
 
 	fo = open(output_file, 'w')
-	ScehduleMods.ScheduleToPDF(fo, sched_fixed)
+	ScheduleMods.ScheduleToPDF(fo, sched_fixed)
 	fo.close()
