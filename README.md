@@ -8,10 +8,11 @@ Specifically :
 * /transcript_extractor : a utility to extract an up-to-date unofficial transcript from the McGill website
 * /schedule_extractor : a utility to extract a week's schedule from the McGill website
 
+__UPDATE:__ default behaviour is now to output to printable PDF for both utilities.
+
 ## Transcript Extractor
 Because sometimes you need a version of your transcript handy (and waiting a couple days, walking to Service Point isn't convenient). Print screen and print page to PDF keeps all the links, the banner and in general is unconvenient. The transcript extractor fetches the transcript, strips extraneous data and saves a HTML file that can be open with any browser. Print to PDF for a clean, clear unofficial transcript.
 
-__UPDATE:__ default behaviour is now to output to printable PDF
 
 ###Usage
 Run the utility through the command line as it requires input arguments.
@@ -33,11 +34,11 @@ Run the utility through the command line as it requires input arguments.
 
 To get full usage information run : McGill_schedule_extractor.py -h
 
-`./schedule_extractor/McGill_schedule_extractor.py john.doe0@mail.mcgill.ca output.html mm/dd/yyyy` will extract the student's (replace john.doe0@mail.mcgill.ca with your own McGill email) schedule of the week in which mm/dd/yyyy occurs to output.html. You will be prompted to input the password associated with the email.
+`./schedule_extractor/McGill_schedule_extractor.py john.doe0@mail.mcgill.ca output.pdf mm/dd/yyyy` will extract the student's (replace john.doe0@mail.mcgill.ca with your own McGill email) schedule of the week in which mm/dd/yyyy occurs to output.pdf. You will be prompted to input the password associated with the email.
 
 The code can be modified to use a local version of the schedule html (retrieved by saving the schedule html when on the schedule page). The Perl file is the original local implementation and does not contain any additions and bug fixes the Python script contains.
 
-optional flags can be used to change the highlight color
+optional flags can be used to change the highlight color and for html only or additional output.
 
 
 ## Dependencies
@@ -58,3 +59,4 @@ optional flags can be used to change the highlight color
 
    
 * FIXED: ~~Extracted schedule : in output html, courses don't exactly line up with the times they occur.~~
+* Extracted schedule : if there is no schedule to display (e.g. a term during which no classes are taken) a ho.pisa exception is raised, a blank file is produced
