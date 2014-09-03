@@ -57,4 +57,4 @@ optional flags can be used to change the highlight color
     `REPORTLAB22 = ((reportlab.Version[0] == "2" and reportlab.Version[2] >= "2") or (reportlab.Version[0] > "2"))`
 
    
-* Extracted schedule : in output html, courses don't exactly line up with the times they occur.
+* FIXED: ~~Extracted schedule : in output html, courses don't exactly line up with the times they occur.~~
